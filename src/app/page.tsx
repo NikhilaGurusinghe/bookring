@@ -1,6 +1,5 @@
 import members from "./webring/membership-lists/default";
 import WebringAutoNavigate from "./webring/components/webring-auto-navigate";
-import Link from "next/link";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -9,6 +8,8 @@ export default function Home() {
         <Suspense>
           <WebringAutoNavigate membersJSON={JSON.stringify(members)} />
         </Suspense>
+
+        <div>Next.js test</div>
       </main>
   );
 }

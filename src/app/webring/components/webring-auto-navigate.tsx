@@ -2,13 +2,15 @@
 // thank you to them for making this script :)
 "use client"
 
-import { redirect, RedirectType, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { Member } from "../members";
 
 type WebringAutoNavigateProps = { membersJSON: string };
 
+// this is the name of the parameter we are looking for when a webring participant queries this site
 const ACTION_PARAM_KEYWORD: string = "action";
+// these are the valid parameter values that a webring participant can send this site
 enum NavigationActions {
     NEXT = "next",
     PREVIOUS = "previous",
