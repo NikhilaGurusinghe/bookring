@@ -49,11 +49,13 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
                     default:
                         // invalid request
                         memberIndexToRedirectTo = -1;
+                        window.location.replace("https://nikhilagurusinghe.github.io/bookring/400");
                 }
 
                 // goodbye 🙋‍♀️ 
                 window.location.replace(members[memberIndexToRedirectTo].baseURL.href);
             } else {
+                // forbidden - referrer isn't a member, but is trying to be redirected like a member
                 window.location.replace("https://nikhilagurusinghe.github.io/bookring/403");
             }
         }
