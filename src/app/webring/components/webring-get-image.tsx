@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import type { Member } from "../members";
+import { findMemberIndex } from "../members";
 import type { WebringScriptProps } from "./webring-scripts";
 
 
@@ -20,12 +20,21 @@ export default function WebringGetImage({ members, referrer } : WebringScriptPro
     console.log("IMAGE| navigateAction was", imageQuery)
     const isImageQueryValid: boolean = imageQuery !== null && Object.values(ImageQueryOptions).includes(imageQuery as ImageQueryOptions);
     console.log(isImageQueryValid)
-    
+    console.log("referrer was: ", referrer)
+
     useEffect(() => {
-        if (referrer !== undefined && isImageQueryValid) {
-            
+        if (referrer !== undefined && referrer !== "" && isImageQueryValid) {
+            const referrerURL: URL = new URL(referrer);
+            const referrerMemberIndex: number = findMemberIndex(members, referrerURL);
+
+            if (referrerMemberIndex !== -1) {
+                if ((imageQuery as string) === ImageQueryOptions.CURRENT) {
+                    // TODO need to load image as an arraybuffer and then send this as a Response of type image/ something
+                    window.location.replace(members[referrerMemberIndex].imageURL.href);
+                }
+            }
         }
-    });
+    }, [members, referrer]);
 
 
     return null;

@@ -18,7 +18,6 @@ export default function WebringScripts() {
     return (
         <> 
             <WebringAutoNavigate members={members} referrer={referrer} />
-            <WebringGetImage members={members} referrer={referrer} />
         </>
     );
 }
