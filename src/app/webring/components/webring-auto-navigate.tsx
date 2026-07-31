@@ -27,7 +27,7 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
 
     // getting our "referer"
     useEffect(() => {
-        if (referrer !== undefined && isNavigateActionValid) {
+        if (referrer !== undefined && referrer !== null && referrer !== "" && isNavigateActionValid) {
             console.log("referer was:", referrer);
             const referrerURL: URL = new URL(referrer);
             const referrerMemberIndex: number = findMemberIndex(members, referrerURL);
