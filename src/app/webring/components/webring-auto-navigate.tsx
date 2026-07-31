@@ -4,9 +4,8 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { type Member, parseMembersJSON } from "../members";
-
-type WebringAutoNavigateProps = { membersJSON: string };
+import type { Member } from "../members";
+import type { WebringScriptProps } from "./webring-scripts";
 
 // this is the name of the parameter we are looking for when a webring participant queries this site
 const ACTION_PARAM_KEYWORD: string = "action";
@@ -17,9 +16,8 @@ enum NavigationActions {
     RANDOM = "random",
 };
 
-export default function WebringAutoNavigate({ membersJSON } : WebringAutoNavigateProps) {
+export default function WebringAutoNavigate({ members, referrer } : WebringScriptProps) {
     // members list
-    const members: Member[] = parseMembersJSON(membersJSON);
     console.log(members)
 
     // getting query params from url
@@ -32,12 +30,9 @@ export default function WebringAutoNavigate({ membersJSON } : WebringAutoNavigat
 
     // getting our "referer"
     useEffect(() => {
-        if (document.referrer !== undefined && isNavigateActionValid) {
-            console.log("referer was:", document.referrer);
-            // getting the hostname:portNumber of our referer (if there is any portNumber, otherwise just hostname)
-            // https://stackoverflow.com/questions/1420881/how-to-extract-base-url-from-a-string-in-javascript
-            // const referrerHost: string = document.referrer.split("/")[2];
-            const referrerHost: string = (new URL(document.referrer)).host;
+        if (referrer !== undefined && isNavigateActionValid) {
+            console.log("referer was:", referrer);
+            const referrerHost: string = (new URL(referrer)).host;
 
             const referrerMemberIndex: number = members.findIndex((member: Member) => {
                 // see members var declaration for why we do this
