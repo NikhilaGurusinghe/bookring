@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# [Bookring](https://nikhilagurusinghe.github.io/bookring/)
+### Bookring Widget
+```html
+ <div style="display: inline-flex; gap: 18px; align-items: center;" aria-label="Bookring navigation widget">
+    <a href="https://nikhilagurusinghe.github.io/bookring/?action=previous" title="Previous Bookring site"
+      style="transition: transform .05s ease;" onmouseover="this.style.transform='scale(1.05)';"
+      onmouseout="this.style.transform='scale(1)'">
+      <img src="https://nikhilagurusinghe.github.io/bookring/images/webring_widget/previous.png" width="32px" aria-hidden="true"/>
+      <span
+        style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;">
+        Previous Bookring Site
+      </span>
+    </a>
+    <a href="https://nikhilagurusinghe.github.io/bookring/" aria-label="Bookring homepage"
+      title="Bookring (i.e. a book themed webring)" style="transition: transform .05s ease;"
+      onmouseover="this.style.transform='scaleX(1.125)'" onmouseout="this.style.transform='scale(1)'">
+      <img src="https://nikhilagurusinghe.github.io/bookring/images/webring_widget/book.png" width="48px" aria-hidden="true"/>
+      <span
+        style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;">
+        Bookring homepage
+      </span>
+    </a>
+    <a href="https://nikhilagurusinghe.github.io/bookring/?action=next" aria-label="Next Bookring site"
+      title="Go to next site" style="transition: transform .05s ease;" onmouseover="this.style.transform='scale(1.05)'"
+      onmouseout="this.style.transform='scale(1)'">
+      <img src="https://nikhilagurusinghe.github.io/bookring/images/webring_widget/next.png" width="32px" aria-hidden="true"/>
+      <span
+        style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;">
+        Next Bookring site
+      </span>
+    </a>
+  </div>
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
