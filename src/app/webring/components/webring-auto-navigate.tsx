@@ -26,9 +26,9 @@ export default function WebringAutoNavigate({ membersJSON } : WebringAutoNavigat
     const searchParams = useSearchParams();
     const navigateAction: string | null = searchParams.get(ACTION_PARAM_KEYWORD);
     // https://stackoverflow.com/questions/43804805/check-if-value-exists-in-enum-in-typescript
-    const isNavigateActionValid: boolean = navigateAction !== null && Object.values(NavigationActions).includes(navigateAction);
+    const isNavigateActionValid: boolean = navigateAction !== null && Object.values(NavigationActions).includes(navigateAction as NavigationActions);
     console.log("navigateAction was", navigateAction)
-    console.log("was navigateAction in enum was", Object.values(NavigationActions).includes(navigateAction))
+    // console.log("was navigateAction in enum was", Object.values(NavigationActions).includes(navigateAction))
 
     // getting our "referer"
     useEffect(() => {
