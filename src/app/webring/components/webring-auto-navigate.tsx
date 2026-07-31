@@ -58,6 +58,8 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
                 console.log("redirecting to ", members[memberIndexToRedirectTo].baseURL.href);
                 // goodbye 🙋‍♀️ 
                 window.location.replace(members[memberIndexToRedirectTo].baseURL.href);
+            } else {
+                window.location.replace(new URL("/403", window.origin));
             }
         }
     })
