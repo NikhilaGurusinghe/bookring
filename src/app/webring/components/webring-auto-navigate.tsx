@@ -54,7 +54,7 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
                 // goodbye 🙋‍♀️ 
                 window.location.replace(members[memberIndexToRedirectTo].baseURL.href);
             } else {
-                window.location.replace(new URL("/403", window.origin));
+                window.location.replace("https://nikhilagurusinghe.github.io/bookring/403");
             }
         }
     })
