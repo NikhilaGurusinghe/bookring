@@ -22,3 +22,7 @@
         </a>
   </div>
 ```
+### Credits
+- https://petrapixel.neocities.org/coding/webringu
+- https://oldwindowsicons.tumblr.com/post/809918922243620864/windows-xp-mmcndmgrdll-icon-30574
+- https://oldwindowsicons.tumblr.com/post/674491650482028545/windows-31-progmanexe-icon-044
