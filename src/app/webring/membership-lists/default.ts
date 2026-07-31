@@ -38,7 +38,7 @@ const members: Member[] = [
         "Sophie’s World by Jostein Gaarder",
         new URL("https://www.goodreads.com/en/book/show/10959.Sophie_s_World")),
     new BookringMember("site 8",
-        new URL("https://nikhilagurusinghe.github.io/bookring/?1"),
+        new URL("https://nikhilagurusinghe.github.io/bookring/?7"),
         new URL("https://nikhilagurusinghe.github.io/bookring/https://nikhilagurusinghe.github.io/bookring/images/book_covers/foundation.jpg"),
         "Foundation by Isaac Asimov",
         new URL("https://www.goodreads.com/en/book/show/29579.Foundation")),
