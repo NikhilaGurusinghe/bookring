@@ -1,0 +1,18 @@
+info:
+  name: previous webring site
+  type: http
+
+http:
+  method: GET
+  url: https://nikhilagurusinghe.github.io/bookring/?action=previous
+  params:
+    - name: action
+      value: previous
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
