@@ -3,7 +3,7 @@ import WebringScripts from "./webring/components/webring-scripts";
 
 export default function Home() {
   return (
-      <main>
+      <main className="font-bold">
         <Suspense>
           <WebringScripts />
         </Suspense>

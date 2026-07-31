@@ -22,16 +22,12 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
     const navigateAction: string | null = searchParams.get(ACTION_PARAM_KEYWORD);
     // https://stackoverflow.com/questions/43804805/check-if-value-exists-in-enum-in-typescript
     const isNavigateActionValid: boolean = navigateAction !== null && Object.values(NavigationActions).includes(navigateAction as NavigationActions);
-    console.log("navigateAction was", navigateAction)
-    // console.log("was navigateAction in enum was", Object.values(NavigationActions).includes(navigateAction))
 
     // getting our "referer"
     useEffect(() => {
         if (referrer !== undefined && referrer !== null && referrer !== "" && isNavigateActionValid) {
-            console.log("referer was:", referrer);
             const referrerURL: URL = new URL(referrer);
             const referrerMemberIndex: number = findMemberIndex(members, referrerURL);
-            console.log(referrerMemberIndex);
 
             // if the referrer is one of our members
             if (referrerMemberIndex !== -1) {
@@ -55,7 +51,6 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
                         memberIndexToRedirectTo = -1;
                 }
 
-                console.log("redirecting to ", members[memberIndexToRedirectTo].baseURL.href);
                 // goodbye 🙋‍♀️ 
                 window.location.replace(members[memberIndexToRedirectTo].baseURL.href);
             } else {
