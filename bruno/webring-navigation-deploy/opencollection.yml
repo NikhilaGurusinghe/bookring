@@ -1,7 +1,7 @@
 opencollection: 1.0.0
 
 info:
-  name: webring-navigation-api
+  name: webring-navigation-deploy
 config:
   proxy:
     inherit: true
