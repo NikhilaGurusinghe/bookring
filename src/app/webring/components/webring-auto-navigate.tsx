@@ -3,8 +3,8 @@
 "use client"
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import type { Member } from "../members";
+import { useEffect } from "react";
+import { type Member, parseMembersJSON } from "../members";
 
 type WebringAutoNavigateProps = { membersJSON: string };
 
@@ -19,75 +19,65 @@ enum NavigationActions {
 
 export default function WebringAutoNavigate({ membersJSON } : WebringAutoNavigateProps) {
     // members list
-    const members: Member[] = JSON.parse(membersJSON);
+    const members: Member[] = parseMembersJSON(membersJSON);
+    console.log(members)
 
     // getting query params from url
     const searchParams = useSearchParams();
     const navigateAction: string | null = searchParams.get(ACTION_PARAM_KEYWORD);
+    // https://stackoverflow.com/questions/43804805/check-if-value-exists-in-enum-in-typescript
+    const isNavigateActionValid: boolean = navigateAction !== null && Object.values(NavigationActions).includes(navigateAction);
+    console.log("navigateAction was", navigateAction)
+    console.log("was navigateAction in enum was", Object.values(NavigationActions).includes(navigateAction))
 
     // getting our "referer"
-    const [referrer, setReferrer] = useState<string>();
     useEffect(() => {
-        setReferrer(document.referrer);
-    })
+        if (document.referrer !== undefined && isNavigateActionValid) {
+            console.log("referer was:", document.referrer);
+            // getting the hostname:portNumber of our referer (if there is any portNumber, otherwise just hostname)
+            // https://stackoverflow.com/questions/1420881/how-to-extract-base-url-from-a-string-in-javascript
+            // const referrerHost: string = document.referrer.split("/")[2];
+            const referrerHost: string = (new URL(document.referrer)).host;
 
-    console.log(members)
-    console.log(referrer)
+            const referrerMemberIndex: number = members.findIndex((member: Member) => {
+                // see members var declaration for why we do this
+                const currMemberHost: string = member.baseURL.host;
 
-    if (referrer !== undefined && navigateAction !== null) {
-        // getting the hostname:portNumber of our referer (if there is any portNumber, otherwise just hostname)
-        // https://stackoverflow.com/questions/1420881/how-to-extract-base-url-from-a-string-in-javascript
-        const referrerHost: string = referrer.split("/")[2];
+                // URL.host returns the hostname:portNumber (if there is any portNumber, otherwise just hostname)
+                console.log("referer vs members url comps:", currMemberHost, referrerHost, currMemberHost === referrerHost)
 
+                return currMemberHost === referrerHost;
+            });
+            console.log(referrerMemberIndex);
 
-        const referrerMemberIndex: number = members.findIndex((member: Member) => {
-            // URL.host returns the hostname:portNumber (if there is any portNumber, otherwise just hostname)
-            console.log(member.baseURL.toString(), referrer,  member.baseURL.host === referrerHost)
-
-            return member.baseURL.host === referrerHost;
-        });
-        console.log(referrerMemberIndex);
-
-        if (referrerMemberIndex === -1) {
-            console.log("bad!");
-            return (
-        <div>
-            referrer: {referrer}
-        </div>
-    ); // do nothing
-        }
-
-        // if the referrer is one of our members
-        let memberIndexToRedirectTo = 0;
-        switch (navigateAction.toLowerCase()) {
-            case NavigationActions.NEXT:
-                memberIndexToRedirectTo = referrerMemberIndex + 1 === members.length ? 0 : referrerMemberIndex + 1;
-                break;
-            case NavigationActions.PREVIOUS:
-                memberIndexToRedirectTo = referrerMemberIndex - 1 === -1 ? members.length - 1 : referrerMemberIndex - 1;
-                break;
-            case NavigationActions.RANDOM:
-                memberIndexToRedirectTo = referrerMemberIndex;
-                while (memberIndexToRedirectTo === referrerMemberIndex) {
-                    memberIndexToRedirectTo = Math.floor(Math.random() * members.length);
+            // if the referrer is one of our members
+            if (referrerMemberIndex !== -1) {
+                let memberIndexToRedirectTo = -1;
+                // navigateAction can't be null here as we check isNavigateActionValid which checks nullity
+                switch ((navigateAction as string).toLowerCase()) {
+                    case NavigationActions.NEXT:
+                        memberIndexToRedirectTo = referrerMemberIndex + 1 === members.length ? 0 : referrerMemberIndex + 1;
+                        break;
+                    case NavigationActions.PREVIOUS:
+                        memberIndexToRedirectTo = referrerMemberIndex - 1 === -1 ? members.length - 1 : referrerMemberIndex - 1;
+                        break;
+                    case NavigationActions.RANDOM:
+                        memberIndexToRedirectTo = referrerMemberIndex;
+                        while (memberIndexToRedirectTo === referrerMemberIndex) {
+                            memberIndexToRedirectTo = Math.floor(Math.random() * members.length);
+                        }
+                        break;
+                    default:
+                        // invalid request
+                        memberIndexToRedirectTo = -1;
                 }
-                break;
-            default:
-                return (
-        <div>
-            referrer: {referrer}
-        </div>
-    );  // do nothing
-        }
 
-        console.log("redirecting to ", memberIndexToRedirectTo);
-        // goodbye 🙋‍♀️
-        // redirect(members[memberIndexToRedirectTo].baseURL.toString(), RedirectType.replace);    
-    }
+                console.log("redirecting to ", members[memberIndexToRedirectTo].baseURL.href);
+                // goodbye 🙋‍♀️ 
+                window.location.replace(members[memberIndexToRedirectTo].baseURL.href);
+            }
+        }
+    })
     
-    return (
-        <div>
-            referrer: {referrer}
-        </div>
-    ); // do nothing
+    return null; // do nothing
 }
