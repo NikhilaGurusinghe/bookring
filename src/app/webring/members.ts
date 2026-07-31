@@ -14,3 +14,14 @@ export class Member {
         this.description = description;
     }
 }
+
+export function findMemberIndex(members: Member[], referrerURL: URL) {
+    const referrerHost: string = referrerURL.host;
+
+    return members.findIndex((member: Member) => {
+        // see members var declaration for why we do this
+        const currMemberHost: string = member.baseURL.host;
+
+        return currMemberHost === referrerHost;
+    });
+}

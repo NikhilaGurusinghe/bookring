@@ -4,7 +4,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import type { Member } from "../members";
+import { findMemberIndex } from "../members";
 import type { WebringScriptProps } from "./webring-scripts";
 
 // this is the name of the parameter we are looking for when a webring participant queries this site
@@ -17,9 +17,6 @@ enum NavigationActions {
 };
 
 export default function WebringAutoNavigate({ members, referrer } : WebringScriptProps) {
-    // members list
-    console.log(members)
-
     // getting query params from url
     const searchParams = useSearchParams();
     const navigateAction: string | null = searchParams.get(ACTION_PARAM_KEYWORD);
@@ -32,17 +29,8 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
     useEffect(() => {
         if (referrer !== undefined && isNavigateActionValid) {
             console.log("referer was:", referrer);
-            const referrerHost: string = (new URL(referrer)).host;
-
-            const referrerMemberIndex: number = members.findIndex((member: Member) => {
-                // see members var declaration for why we do this
-                const currMemberHost: string = member.baseURL.host;
-
-                // URL.host returns the hostname:portNumber (if there is any portNumber, otherwise just hostname)
-                console.log("referer vs members url comps:", currMemberHost, referrerHost, currMemberHost === referrerHost)
-
-                return currMemberHost === referrerHost;
-            });
+            const referrerURL: URL = new URL(referrer);
+            const referrerMemberIndex: number = findMemberIndex(members, referrerURL);
             console.log(referrerMemberIndex);
 
             // if the referrer is one of our members
