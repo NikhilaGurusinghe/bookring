@@ -57,7 +57,7 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
                 window.location.replace(members[memberIndexToRedirectTo].baseURL.href);
             } else {
                 // forbidden - referrer isn't a member, but is trying to be redirected like a member
-                // window.location.replace("https://nikhilagurusinghe.github.io/bookring/403");
+                window.location.replace("https://nikhilagurusinghe.github.io/bookring/403");
             }
         }
     })

@@ -3,7 +3,7 @@ import type { Member } from "../members"
 
 const members: Member[] = [
     new BookringMember("Nikhila's site", 
-        new URL("http://localhost:3000/"), 
+        new URL("https://comp4020-agentic-coding-studio.github.io/comp4020-crit1-NikhilaGurusinghe/"), 
         new URL("https://nikhilagurusinghe.github.io/bookring/images/book_covers/the_yellow_wallpaper.jpg"),
         "The Yellow Wallpaper by Charlotte Perkins Stetson", 
         new URL("https://www.goodreads.com/book/show/235789141-the-yellow-wall-paper")),

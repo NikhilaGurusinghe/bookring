@@ -24,7 +24,7 @@ export function findMemberIndex(members: Member[], referrerURL: URL) {
         // we're checking here if the referrers href contains our current member's href
         // this means that if referrer is "https://mysite.com/my-specific-webring-site/webrings.html"
         // will evaluate to true for a member's baseURL of "https://mysite.com/my-specific-webring-site"
-        console.log(referrerHref, "includes", currMemberHref);
+        // console.log(referrerHref, "includes", currMemberHref);
         return referrerHref.includes(currMemberHref);
     });
 }
