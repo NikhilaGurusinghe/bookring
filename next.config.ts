@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
 
   // this is so links use the correct github pages url rather than the base
   basePath: process.env.PAGES_BASE_PATH,
+
+  images: { unoptimized: true }, 
   
 };
 
