@@ -1,5 +1,5 @@
 import { BookringMember } from "../bookring-member";
-import { Member } from "../members"
+import type { Member } from "../members"
 
 const members: Member[] = [
     new BookringMember("Nikhila's site", 

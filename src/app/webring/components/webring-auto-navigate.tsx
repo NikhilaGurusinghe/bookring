@@ -25,6 +25,7 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
 
     // getting our "referer"
     useEffect(() => {
+        // TODO better can referrer become url checking here
         if (referrer !== undefined && referrer !== null && referrer !== "" && isNavigateActionValid) {
             const referrerURL: URL = new URL(referrer);
             const referrerMemberIndex: number = findMemberIndex(members, referrerURL);
@@ -56,7 +57,7 @@ export default function WebringAutoNavigate({ members, referrer } : WebringScrip
                 window.location.replace(members[memberIndexToRedirectTo].baseURL.href);
             } else {
                 // forbidden - referrer isn't a member, but is trying to be redirected like a member
-                window.location.replace("https://nikhilagurusinghe.github.io/bookring/403");
+                // window.location.replace("https://nikhilagurusinghe.github.io/bookring/403");
             }
         }
     })
