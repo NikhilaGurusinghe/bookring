@@ -16,12 +16,14 @@ export class Member {
 }
 
 export function findMemberIndex(members: Member[], referrerURL: URL) {
-    const referrerHost: string = referrerURL.host;
+    const referrerHref: string = referrerURL.href;
 
     return members.findIndex((member: Member) => {
-        // see members var declaration for why we do this
-        const currMemberHost: string = member.baseURL.host;
+        const currMemberHref: string = member.baseURL.href;
 
-        return currMemberHost === referrerHost;
+        // we're checking here if the referrers href contains our current member's href
+        // this means that if referrer is "https://mysite.com/my-specific-webring-site/webrings.html"
+        // will evaluate to true for a member's baseURL of "https://mysite.com/my-specific-webring-site"
+        return referrerHref.includes(currMemberHref);
     });
 }
